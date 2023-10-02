@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Les Ambassadeurs, the first Restaurant we Visited in Paris"
+author: sal
 categories: [ Lifestyle ]
 tags: [ France, Germany, Spain, Japan, Korea, China, Hollnad, Canada, Italy, Russia ]
 image: ../assets/images/2.jpg

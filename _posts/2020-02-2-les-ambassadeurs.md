@@ -3,7 +3,7 @@ layout: post
 title:  "Les Ambassadeurs, the first Restaurant we Visited in Paris"
 author: sal
 categories: [ Lifestyle ]
-tags: [ France ]
+tags: [ France, germany ]
 image: ../assets/images/2.jpg
 rating: 4.5
 ---
@@ -23,3 +23,4 @@ Les Ambassadeurs had two Michelin stars. In the last decade of its operation, ch
 In 2017 Hache opened a smaller restaurant, L'Écrin, within the renovated hotel; the former space of Les Ambassadeurs became a bar.
 
 test up
+

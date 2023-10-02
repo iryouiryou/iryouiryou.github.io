@@ -26,9 +26,9 @@ test up
 [ththththththth](http://taro-hana.ijinkai.or.jp/)
 
 
-<div class="rating mt-4 mb-4 d-flex align-items-center">
+<div class="mt-4 mb-4 d-flex align-items-center">
 <strong class="mr-1">b: VG</strong>
 </div>
-<div class="rating mt-4 mb-4 d-flex align-items-center">
+<div class="mt-4 mb-4 d-flex align-items-center">
 <strong class="mr-1">J: G</strong>
 </div>

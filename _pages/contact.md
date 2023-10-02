@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Contact
+title: お問合せ
 permalink: /contact
 comments: false
 ---
@@ -16,5 +16,5 @@ comments: false
 </div>
 </div>
 <textarea rows="8" class="form-control mb-3" name="message" placeholder="メッセージ*" required></textarea>    
-<input class="btn btn-dark" type="submit" value="Send">
+<input class="btn btn-dark" type="submit" value="送信">
 </form>

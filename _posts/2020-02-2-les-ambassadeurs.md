@@ -11,7 +11,7 @@ v-rating: VG
 
 アイウエオあいうえお愛上尾かきくけこカキクケコ下記九毛粉
 
-That7s always a center of entertainment for the aristocracy, in the 1870s it also became a regular destination of some of the best known figures of art and the demi-monde. Edgar Degas and Henri de Toulouse-Lautrec portrayed visitors at the night club, and Aristide Bruant performed there.
+That's always a center of entertainment for the aristocracy, in the 1870s it also became a regular destination of some of the best known figures of art and the demi-monde. Edgar Degas and Henri de Toulouse-Lautrec portrayed visitors at the night club, and Aristide Bruant performed there.
 
 > It was decorated in an 18th-century rococo style, redesigned by Sybille de Margérie with furnishings by Sonia Rykiel.
 
@@ -23,7 +23,7 @@ In 2017 Hache opened a smaller restaurant, L'Écrin, within the renovated hotel;
 
 test up
 
-~~[ththththththth](http://taro-hana.ijinkai.or.jp/)~~
+~~[google](https://www.google.com/)~~
 
 
 <div class="mt-4 mb-4 d-flex align-items-center">

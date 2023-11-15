@@ -26,13 +26,7 @@ var idx = lunr(function () {
     this.field('title')
     this.field('body')
 
-this.use(lunr.jp)
-
-  var that = this;
-  $.each(result, function(i, value) {
-    var row = $.extend({ "id": i }, value)
-    that.add(row);
-  });
+this.use(lunr.ja)
 
     documents.forEach(function (doc) {
         this.add(doc)

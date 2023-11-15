@@ -26,8 +26,6 @@ var idx = lunr(function () {
     this.field('title')
     this.field('body')
 
-this.use(lunr.ja)
-
     documents.forEach(function (doc) {
         this.add(doc)
     }, this)

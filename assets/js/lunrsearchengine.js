@@ -22,15 +22,19 @@ var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or p
     }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}];
 
 var idx = lunr(function () {
-    this.ref('id')
-    this.field('title')
-    this.field('body')
+  this.field('id');
+  this.field('title', { boost: 10 });
+  this.field('author');
+  this.field('category');
 
-    this.use(lunr.ja)
+  // この行を追加しました
+  this.use(lunr.ja)
 
-    documents.forEach(function (doc) {
-        this.add(doc)
-    }, this)
+  var that = this;
+  $.each(result, function(i, value) {
+    var row = $.extend({ "id": i }, value)
+    that.add(row);
+  });
 });
 function lunr_search(term) {
     document.getElementById('lunrsearchresults').innerHTML = '<ul></ul>';

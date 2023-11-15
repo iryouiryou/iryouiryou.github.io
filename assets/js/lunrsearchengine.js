@@ -22,12 +22,10 @@ var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or p
     }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}];
 
 var idx = lunr(function () {
-  // use the language (de)
-  this.use(lunr.ja);
-  // then, the normal lunr index initialization
-  this.field('title', { boost: 10 });
-  this.field('body');
-  // now you can call this.add(...) to add documents written in German
+    this.ref('id')
+    this.field('title')
+    this.field('body')
+
     documents.forEach(function (doc) {
         this.add(doc)
     }, this)

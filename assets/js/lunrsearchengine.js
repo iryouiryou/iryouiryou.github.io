@@ -33,7 +33,7 @@ this.use(lunr.jp)
     var row = $.extend({ "id": i }, value)
     that.add(row);
   });
-});
+
     documents.forEach(function (doc) {
         this.add(doc)
     }, this)

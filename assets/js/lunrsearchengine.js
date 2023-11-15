@@ -26,7 +26,7 @@ var idx = lunr(function () {
     this.field('title')
     this.field('body')
 
-this.use(lunr.ja)
+this.use(lunr.jp)
 
   var that = this;
   $.each(result, function(i, value) {

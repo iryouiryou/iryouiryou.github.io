@@ -5,7 +5,7 @@ author: sal
 categories: [ Lifestyle ]
 tags: [ France, Germany, Spain, Japan, Korea, China, Hollnad, Canada, Italy, Russia ]
 image: ../assets/images/2.jpg
-rating: 4.5
+rating: 2.5
 v-rating: VG
 ---
 

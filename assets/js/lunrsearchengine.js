@@ -21,16 +21,10 @@ var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or p
     "body": "{{ page.date | date: "%Y/%m/%d" }} - {{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"{% assign counter = counter | plus: 1 %}
     }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}];
 
-/* init lunr */
-        var lunr = require('{{ site.baseurl }}/assets/js/lunr.js');
-require('{{ site.baseurl }}/assets/js/lunr.stemmer.support.js')(lunr);
-require('{{ site.baseurl }}/assets/js/lunr.ja.js')(lunr);
-require('{{ site.baseurl }}/assets/js/lunr.multi.js')(lunr);
-
-var idx = lunr(function () {
-  // the reason "en" does not appear above is that "en" is built in into lunr js
-  this.use(lunr.multiLanguage('en', 'ja'));
-  // then, the normal lunr index initialization
+vvar idx = lunr(function () {
+    this.ref('id')
+    this.field('title')
+    this.field('body')
 
     documents.forEach(function (doc) {
         this.add(doc)

@@ -22,10 +22,15 @@ var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or p
     }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}];
 
 /* init lunr */
-        var idx = lunr(function () {
-            this.use(lunr.ja);
-            this.field('title', { boost: 10 });
-            this.field('body');
+        var lunr = require('./lib/lunr.js');
+require('./lunr.stemmer.support.js')(lunr);
+require('./lunr.ja.js')(lunr);
+require('./lunr.multi.js')(lunr);
+
+var idx = lunr(function () {
+  // the reason "en" does not appear above is that "en" is built in into lunr js
+  this.use(lunr.multiLanguage('en', 'ja'));
+  // then, the normal lunr index initialization
 
     documents.forEach(function (doc) {
         this.add(doc)

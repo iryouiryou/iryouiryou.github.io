@@ -22,19 +22,12 @@ var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or p
     }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}];
 
 var idx = lunr(function () {
-  this.field('id');
+  // use the language (de)
+  this.use(lunr.ja);
+  // then, the normal lunr index initialization
   this.field('title', { boost: 10 });
-  this.field('author');
-  this.field('category');
-
-  // この行を追加しました
-  this.use(lunr.ja)
-
-  var that = this;
-  $.each(result, function(i, value) {
-    var row = $.extend({ "id": i }, value)
-    that.add(row);
-  });
+  this.field('body');
+  // now you can call this.add(...) to add documents written in German
 });
 function lunr_search(term) {
     document.getElementById('lunrsearchresults').innerHTML = '<ul></ul>';

@@ -27,13 +27,7 @@ var idx = lunr(function () {
             // then, the normal lunr index initialization
             this.field('title', { boost: 10 })
             this.field('body')
-
-  var that = this;
-  $.each(result, function(i, value) {
-    var row = $.extend({ "id": i }, value)
-    that.add(row);
   });
-});
 function lunr_search(term) {
     document.getElementById('lunrsearchresults').innerHTML = '<ul></ul>';
     if(term) {

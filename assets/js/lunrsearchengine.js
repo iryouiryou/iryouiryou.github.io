@@ -22,12 +22,14 @@ var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or p
     }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}];
 
 var idx = lunr(function () {
-            // use the language (ja)
-            this.use(lunr.ja);
-            // then, the normal lunr index initialization
-            this.field('title', { boost: 10 })
-            this.field('body')
-  });
+  this.field('id');
+  this.field('title', { boost: 10 });
+  this.use(lunr.ja)
+
+    documents.forEach(function (doc) {
+        this.add(doc)
+    }, this)
+});
 function lunr_search(term) {
     document.getElementById('lunrsearchresults').innerHTML = '<ul></ul>';
     if(term) {

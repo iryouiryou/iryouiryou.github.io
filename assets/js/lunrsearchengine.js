@@ -24,7 +24,6 @@ var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or p
 var idx = lunr(function () {
   this.field('id');
   this.field('title', { boost: 10 });
-  this.use(lunr.ja)
 
     documents.forEach(function (doc) {
         this.add(doc)

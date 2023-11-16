@@ -23,10 +23,9 @@ var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or p
 
 /* init lunr */
         var idx = lunr(function () {
-            // use the language (ja)
-            // then, the normal lunr index initialization
-            this.field('title', { boost: 10 })
-            this.field('body')
+            this.use(lunr.ja);
+            this.field('title', { boost: 10 });
+            this.field('body');
 
     documents.forEach(function (doc) {
         this.add(doc)

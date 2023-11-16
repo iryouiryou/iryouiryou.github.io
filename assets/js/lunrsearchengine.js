@@ -22,10 +22,10 @@ var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or p
     }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}];
 
 /* init lunr */
-        var lunr = require('./lib/lunr.js');
-require('./lunr.stemmer.support.js')(lunr);
-require('./lunr.ja.js')(lunr);
-require('./lunr.multi.js')(lunr);
+        var lunr = require('{{ site.baseurl }}/assets/js/lunr.js');
+require('{{ site.baseurl }}/assets/js/lunr.stemmer.support.js')(lunr);
+require('{{ site.baseurl }}/assets/js/lunr.ja.js')(lunr);
+require('{{ site.baseurl }}/assets/js/lunr.multi.js')(lunr);
 
 var idx = lunr(function () {
   // the reason "en" does not appear above is that "en" is built in into lunr js

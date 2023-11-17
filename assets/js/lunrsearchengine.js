@@ -29,7 +29,7 @@ require(['{{ site.baseurl }}/assets/js/lunr-0.7.0.min.js', '{{ site.baseurl }}/a
             ja(lunr); // adds `lunr.ja` key
 
 
-var lunr = require('./lib/lunr.js');
+var lunr = require('{{ site.baseurl }}/assets/js/lunr.js');
 require('{{ site.baseurl }}/assets/js/lunr.stemmer.support.js')(lunr);
 require('{{ site.baseurl }}/assets/js/lunr.ru.js')(lunr);
 require('{{ site.baseurl }}/assets/js/lunr.multi.js')(lunr);

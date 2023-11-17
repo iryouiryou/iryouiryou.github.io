@@ -21,11 +21,12 @@ var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or p
     "body": "{{ page.date | date: "%Y/%m/%d" }} - {{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"{% assign counter = counter | plus: 1 %}
     }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}];
 
+require(['lib/lunr.js', '../lunr.stemmer.support.js', '../lunr.ja.js'], function(lunr, stemmerSupport, ja) {
+  // since the stemmerSupport and de add keys on the lunr object, we'll pass it as reference to them
+  // in the end, we will only need lunr.
+  stemmerSupport(lunr); // adds lunr.stemmerSupport
+  de(lunr); // adds lunr.de key
 
-const lunr = require('lunr')
-require('lunr-languages/lunr.stemmer.support.js')(lunr)
-require('lunr-languages/tinyseg.js')(lunr)
-require('lunr-languages/lunr.ja.js')(lunr)
 
 var idx = lunr(function () {
     this.use(lunr.ja);

@@ -35,11 +35,11 @@ var idx = lunr(function () {
     this.ref('id')
     this.field('title')
     this.field('body')
-
+      };
+      
     documents.forEach(function (doc) {
         this.add(doc)
     }, this)
-      };
 });
 function lunr_search(term) {
     document.getElementById('lunrsearchresults').innerHTML = '<ul></ul>';

@@ -21,15 +21,18 @@ var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or p
     "body": "{{ page.date | date: "%Y/%m/%d" }} - {{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"{% assign counter = counter | plus: 1 %}
     }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}];
 
-var idx = lunr(function () {
-    this.ref('id')
-    this.field('title')
-    this.field('body')
+var lunr = require('./lib/lunr.js');
+require('./lunr.stemmer.support.js')(lunr);
+require('./lunr.ja.js')(lunr);
+require('./lunr.multi.js')(lunr);
 
-    documents.forEach(function (doc) {
-        this.add(doc)
-    }, this)
-});
+var idx = lunr(function () {
+  // the reason "en" does not appear above is that "en" is built in into lunr js
+  this.use(lunr.multiLanguage('en', 'ja'));
+  // Compose the japanese tokenizer with the built-in tokenizer
+  this.tokenizer = function(x) {
+    return lunr.tokenizer(x).concat(lunr.ja.tokenizer(x));
+  };
 function lunr_search(term) {
     document.getElementById('lunrsearchresults').innerHTML = '<ul></ul>';
     if(term) {

@@ -24,7 +24,7 @@ var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or p
 var idx = lunr(function () {
     this.use(lunr.ja);
     this.ref('id')
-    this.field('title')
+    this.field('title', { boost: 10 });
     this.field('body')
 
     documents.forEach(function (doc) {

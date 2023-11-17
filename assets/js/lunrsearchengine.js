@@ -21,17 +21,15 @@ var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or p
     "body": "{{ page.date | date: "%Y/%m/%d" }} - {{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"{% assign counter = counter | plus: 1 %}
     }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}];
 
-require(['lib/lunr.js', '{{ site.baseurl }}/assets/js/lunr.stemmer.support.js', '{{ site.baseurl }}/assets/js/lunr.ja.js'], function(lunr, stemmerSupport, ja) {
-  // since the stemmerSupport and de add keys on the lunr object, we'll pass it as reference to them
-  // in the end, we will only need lunr.
-  stemmerSupport(lunr); // adds lunr.stemmerSupport
-  jas(lunr); // adds lunr.de key
-
+var lunr = require('./lib/lunr.js');
+require('./lunr.stemmer.support.js')(lunr);
+require('./lunr.ru.js')(lunr);
+require('./lunr.multi.js')(lunr);
 
 var idx = lunr(function () {
-    this.use(lunr.ja);
+    this.use(lunr.multiLanguage('en', 'ja'));
     this.ref('id')
-    this.field('title', { boost: 10 });
+    this.field('title')
     this.field('body')
 
     documents.forEach(function (doc) {

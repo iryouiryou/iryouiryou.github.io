@@ -33,6 +33,16 @@ var idx = lunr(function () {
   this.tokenizer = function(x) {
     return lunr.tokenizer(x).concat(lunr.ja.tokenizer(x));
   };
+  
+var idx = lunr(function () {
+    this.ref('id')
+    this.field('title')
+    this.field('body')
+
+    documents.forEach(function (doc) {
+        this.add(doc)
+    }, this)
+});
 function lunr_search(term) {
     document.getElementById('lunrsearchresults').innerHTML = '<ul></ul>';
     if(term) {

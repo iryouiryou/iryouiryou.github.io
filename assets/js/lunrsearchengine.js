@@ -33,7 +33,6 @@ var idx = lunr(function () {
   this.tokenizer = function(x) {
     return lunr.tokenizer(x).concat(lunr.ja.tokenizer(x));
   };
-  var idx = lunr(function () {
     this.ref('id')
     this.field('title')
     this.field('body')

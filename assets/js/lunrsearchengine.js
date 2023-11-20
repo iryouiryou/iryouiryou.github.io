@@ -25,6 +25,7 @@ var lunr = require('{{ site.baseurl }}/assets/js/lunr.js');
 require('{{ site.baseurl }}/assets/js/lunr.stemmer.support.js')(lunr);
 require('{{ site.baseurl }}/assets/js/lunr.ja.js')(lunr);
 require('{{ site.baseurl }}/assets/js/lunr.multi.js')(lunr);
+require('{{ site.baseurl }}/assets/js/tinyseg.js')(lunr);
 
 var idx = lunr(function () {
   // the reason "en" does not appear above is that "en" is built in into lunr js
@@ -33,6 +34,14 @@ var idx = lunr(function () {
   this.tokenizer = function(x) {
     return lunr.tokenizer(x).concat(lunr.ja.tokenizer(x));
           };
+    this.ref('id')
+    this.field('title')
+    this.field('body')
+
+      
+    documents.forEach(function (doc) {
+        this.add(doc)
+    }, this)
 });
 function lunr_search(term) {
     document.getElementById('lunrsearchresults').innerHTML = '<ul></ul>';

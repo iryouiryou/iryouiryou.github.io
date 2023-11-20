@@ -32,10 +32,11 @@ var idx = lunr(function () {
   // Compose the japanese tokenizer with the built-in tokenizer
   this.tokenizer = function(x) {
     return lunr.tokenizer(x).concat(lunr.ja.tokenizer(x));
+          };
     this.ref('id')
     this.field('title')
     this.field('body')
-      };
+
       
     documents.forEach(function (doc) {
         this.add(doc)

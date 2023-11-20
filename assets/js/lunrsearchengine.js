@@ -1,25 +1,36 @@
----
+-- -
 layout: null
 sitemap: false
----
+    -- -
 
-{% assign counter = 0 %}
-var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or page.url contains 'assets' or page.url contains 'category' or page.url contains 'tag' %}{% else %}{
-    "id": {{ counter }},
+    { % assign counter = 0 % }
+var documents = [{ % for page in site.pages % } { % if page.url contains '.xml'
+    or page.url contains 'assets'
+    or page.url contains 'category'
+    or page.url contains 'tag' % } { %
+    else % } {
+    "id": { { counter } },
     "url": "{{ site.url }}{{site.baseurl}}{{ page.url }}",
     "title": "{{ page.title }}",
-    "body": "{{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"{% assign counter = counter | plus: 1 %}
-    }, {% endif %}{% endfor %}{% for page in site.without-plugin %}{
-    "id": {{ counter }},
+    "body": "{{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"
+    ', '
+    ' }}"{% assign counter = counter | plus: 1 %}
+}, { % endif % } { % endfor % } { % for page in site.without - plugin % } {
+    "id": { { counter } },
     "url": "{{ site.url }}{{site.baseurl}}{{ page.url }}",
     "title": "{{ page.title }}",
-    "body": "{{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"{% assign counter = counter | plus: 1 %}
-    }, {% endfor %}{% for page in site.posts %}{
-    "id": {{ counter }},
+    "body": "{{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"
+    ', '
+    ' }}"{% assign counter = counter | plus: 1 %}
+}, { % endfor % } { % for page in site.posts % } {
+    "id": { { counter } },
     "url": "{{ site.url }}{{site.baseurl}}{{ page.url }}",
     "title": "{{ page.title }}",
-    "body": "{{ page.date | date: "%Y/%m/%d" }} - {{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"{% assign counter = counter | plus: 1 %}
-    }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}];
+    "body": "{{ page.date | date: " % Y / % m / % d " }} - {{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"
+    ', '
+    ' }}"{% assign counter = counter | plus: 1 %}
+} { % if forloop.last % } { %
+    else % }, { % endif % } { % endfor % }];
 
 var lunr = require('{{ site.baseurl }}/assets/js/lunr.js');
 require('{{ site.baseurl }}/assets/js/lunr.stemmer.support.js')(lunr);
@@ -27,29 +38,29 @@ require('{{ site.baseurl }}/assets/js/lunr.ja.js')(lunr);
 require('{{ site.baseurl }}/assets/js/lunr.multi.js')(lunr);
 require('{{ site.baseurl }}/assets/js/tinyseg.js')(lunr);
 
-var idx = lunr(function () {
-  // the reason "en" does not appear above is that "en" is built in into lunr js
-  this.use(lunr.multiLanguage('en', 'ja'));
-  // Compose the japanese tokenizer with the built-in tokenizer
-  this.tokenizer = function(x) {
-    return lunr.tokenizer(x).concat(lunr.ja.tokenizer(x));
-          };
+var idx = lunr(function() {
+    // the reason "en" does not appear above is that "en" is built in into lunr js
+    this.use(lunr.multiLanguage('en', 'ja'));
+    };
+    // Compose the japanese tokenizer with the built-in tokenizer
+    this.tokenizer = function(x) {
+        return lunr.tokenizer(x).concat(lunr.ja.tokenizer(x));
+
     this.ref('id')
     this.field('title')
     this.field('body')
-
-      
-    documents.forEach(function (doc) {
+    documents.forEach(function(doc) {
         this.add(doc)
     }, this)
-});
+};
+
 function lunr_search(term) {
     document.getElementById('lunrsearchresults').innerHTML = '<ul></ul>';
-    if(term) {
+    if (term) {
         document.getElementById('lunrsearchresults').innerHTML = "<p>Search results for '" + term + "'</p>" + document.getElementById('lunrsearchresults').innerHTML;
         //put results on the screen.
         var results = idx.search(term);
-        if(results.length>0){
+        if (results.length > 0) {
             //console.log(idx.search(term));
             //if results
             for (var i = 0; i < results.length; i++) {
@@ -57,8 +68,8 @@ function lunr_search(term) {
                 var ref = results[i]['ref'];
                 var url = documents[ref]['url'];
                 var title = documents[ref]['title'];
-                var body = documents[ref]['body'].substring(0,160)+'...';
-                document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML + "<li class='lunrsearchresult'><a href='" + url + "'><span class='title'>" + title + "</span><span class='body'>"+ body +"</span><span class='url'>"+ url +"</span></a></li>";
+                var body = documents[ref]['body'].substring(0, 160) + '...';
+                document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML + "<li class='lunrsearchresult'><a href='" + url + "'><span class='title'>" + title + "</span><span class='body'>" + body + "</span><span class='url'>" + url + "</span></a></li>";
             }
         } else {
             document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = "<li class='lunrsearchresult'>No results found...</li>";
@@ -68,15 +79,15 @@ function lunr_search(term) {
 }
 
 function lunr_search(term) {
-    $('#lunrsearchresults').show( 400 );
-    $( "body" ).addClass( "modal-open" );
-    
+    $('#lunrsearchresults').show(400);
+    $("body").addClass("modal-open");
+
     document.getElementById('lunrsearchresults').innerHTML = '<div id="resultsmodal" class="modal fade show d-block"  tabindex="-1" role="dialog" aria-labelledby="resultsmodal"> <div class="modal-dialog shadow" role="document"> <div class="modal-content"> <div class="modal-header" id="modtit"> <button type="button" class="close" id="btnx" data-dismiss="modal" aria-label="Close"> &times; </button> </div> <div class="modal-body"> <ul class="mb-0"> </ul>    </div> <div class="modal-footer"><button id="btnx" type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button></div></div> </div></div>';
-    if(term) {
+    if (term) {
         document.getElementById('modtit').innerHTML = "<h5 class='modal-title'>Search results for '" + term + "'</h5>" + document.getElementById('modtit').innerHTML;
         //put results on the screen.
         var results = idx.search(term);
-        if(results.length>0){
+        if (results.length > 0) {
             //console.log(idx.search(term));
             //if results
             for (var i = 0; i < results.length; i++) {
@@ -84,8 +95,8 @@ function lunr_search(term) {
                 var ref = results[i]['ref'];
                 var url = documents[ref]['url'];
                 var title = documents[ref]['title'];
-                var body = documents[ref]['body'].substring(0,160)+'...';
-                document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML + "<li class='lunrsearchresult'><a href='" + url + "'><span class='title'>" + title + "</span><small><span class='body'>"+ body +"</span><span class='url'>"+ url +"</span></small></a></li>";
+                var body = documents[ref]['body'].substring(0, 160) + '...';
+                document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML + "<li class='lunrsearchresult'><a href='" + url + "'><span class='title'>" + title + "</span><small><span class='body'>" + body + "</span><span class='url'>" + url + "</span></small></a></li>";
             }
         } else {
             document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = "<li class='lunrsearchresult'>Sorry, no results found. Close & try a different search!</li>";
@@ -93,10 +104,10 @@ function lunr_search(term) {
     }
     return false;
 }
-    
+
 $(function() {
-    $("#lunrsearchresults").on('click', '#btnx', function () {
-        $('#lunrsearchresults').hide( 5 );
-        $( "body" ).removeClass( "modal-open" );
+    $("#lunrsearchresults").on('click', '#btnx', function() {
+        $('#lunrsearchresults').hide(5);
+        $("body").removeClass("modal-open");
     });
 });
